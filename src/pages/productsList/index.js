@@ -10,18 +10,11 @@ import Skeleton from "react-loading-skeleton";
 
 const ProductsList = () => {
   const { order } = React.useContext(AppStateContext);
-  const { data, loading, error, fetchMore } = useQuery(POST_LIST, {
+  const { data, loading, fetchMore } = useQuery(POST_LIST, {
     variables: { order },
   });
 
   const _handleMore = () => {
-    console.log(
-      "MORRRE ",
-      data.posts.pageInfo.endCursor,
-      order,
-      data.posts.edges.length
-    );
-
     fetchMore({
       variables: {
         order,
