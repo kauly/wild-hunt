@@ -35,7 +35,7 @@
   },
   "scripts": {
     "dev": "webpack serve --config webpack.dev.js",
-    "build": "echo $API_TOKEN; webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js"
   },
   "resolutions": {
     "styled-components": "^5"
