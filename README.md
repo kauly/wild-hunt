@@ -9,5 +9,5 @@ Demo
     yarn && yarn dev
 
     // for production
-    yarn prod
+    yarn build
 ```
