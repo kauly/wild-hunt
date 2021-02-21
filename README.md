@@ -1,7 +1,5 @@
 # Wild Hunt
 
-Demo
-
 ## Scripts
 
 ```js
