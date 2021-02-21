@@ -19,6 +19,8 @@ const link = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const token = process.env.API_TOKEN;
+  console.log("🚀 ~ file: App.js ~ line 22 ~ authLink ~ token", token);
+
   return {
     headers: {
       ...headers,
