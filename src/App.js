@@ -1,0 +1,64 @@
+import * as React from "react";
+import { BrowserRouter as RouterProvider } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+
+import AppContext from "./assets/state";
+import theme from "./assets/theme";
+import Router from "./assets/routes";
+
+const link = createHttpLink({
+  uri: process.env.API,
+});
+
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      authorization: `Bearer ${process.env.API_TOKEN}`,
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(link),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          posts: {
+            keyArgs: ["order"],
+            merge(existing = { edges: [] }, incoming) {
+              return {
+                ...incoming,
+                edges: [...existing.edges, ...incoming.edges],
+              };
+            },
+          },
+        },
+      },
+    },
+  }),
+});
+
+const App = () => {
+  return (
+    <ApolloProvider client={client}>
+      <RouterProvider>
+        <ThemeProvider theme={theme}>
+          <AppContext>
+            <Router />
+          </AppContext>
+        </ThemeProvider>
+      </RouterProvider>
+    </ApolloProvider>
+  );
+};
+
+export default App;
