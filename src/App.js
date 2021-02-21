@@ -13,6 +13,11 @@ import AppContext from "./assets/state";
 import theme from "./assets/theme";
 import Router from "./assets/routes";
 
+console.log(
+  "🚀 ~ file: App.js ~ line 22 ~ authLink ~ token",
+  process.env.API_TOKEN
+);
+
 const link = createHttpLink({
   uri: "https://api.producthunt.com/v2/api/graphql",
 });
