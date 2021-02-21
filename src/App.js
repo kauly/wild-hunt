@@ -14,7 +14,7 @@ import theme from "./assets/theme";
 import Router from "./assets/routes";
 
 const link = createHttpLink({
-  uri: process.env.API,
+  uri: "https://api.producthunt.com/v2/api/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
