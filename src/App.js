@@ -18,10 +18,11 @@ const link = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
+  const token = process.env.API_TOKEN;
   return {
     headers: {
       ...headers,
-      authorization: `Bearer ${process.env.API_TOKEN}`,
+      authorization: `Bearer ${token}`,
     },
   };
 });
